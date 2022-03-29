@@ -1,594 +1,567 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="shortcut icon" type="image/png" href="images2/favicon.png" />
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<link rel="apple-touch-icon" sizes="180x180" href="touchbar_icon.png">
-	<title>Micromort | Death Speculative Design</title>
-	<meta name="description" content="Official account of the only existing death-based currency. Trading death has never been so convenient. Start now">
-	<meta name="keywords" content="speculative design, interaction design, experience design, currency, death, communication design, politecnico di milano, laboratorio di sintesi finale c1">
-	<meta name="author" content="Alvise Aspesi, Carlotta Bacchini, Elisa Carbone, Pietro Forino, Davide Peruchini, Enzo Fung Taboada">
-</head>
-
-<style media="screen">
-
-@media only screen and (max-width: 500px) {
-  body {
-    overflow: hidden;
-  }
-}
-
-</style>
-
-<body>
-
-	<!-- Inizio cookie -->
-
-	<div class="cookie-disclaimer">
-		<div class="container_cookie">
-			<button type="button" class="accetta accept-cookie" style="right: 14%;" id="scompare">Accept</button>
-			<button type="button" class="declina decline-cookie" style="right: 8%;" id="deleting">Decline</button>
-			<p class="cookie_testo">Micromort uses cookies to provide features on our sites and applications to improve your online experience. See our <a href="policy.html" style="color:#031109">Privacy Policy</a> for more information about cookies. By
-				continuing to use our sites and applications, you agree to our use of cookies.</p>
-		</div>
-	</div>
-	<script>
-		jQuery(document).ready(function() {
-			var cookie = false;
-			var cookieContent = $('.cookie-disclaimer');
-			checkCookie();
-			var controllaCookie = sessionStorage.getItem('cookie');
-			if (controllaCookie === 'true') {
-				cookieContent.hide();
-			}
-
-			function setCookie(cname, cvalue, exdays) {
-				var d = new Date();
-				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-				var expires = "expires=" + d.toGMTString();
-				document.cookie = cname + "=" + cvalue + "; " + expires;
-			}
-
-			function getCookie(cname) {
-				var name = cname + "=";
-				var ca = document.cookie.split(';');
-				for (var i = 0; i < ca.length; i++) {
-					var c = ca[i].trim();
-					if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-				}
-				return "";
-			}
-
-			function checkCookie() {
-				var user = getCookie("username");
-				if (user !== "") {
-					cookie = true;
-				} else {
-					if (user !== "" && user !== null) {
-						setCookie("cvalue", "cvalue", 365);
-					}
-				}
-			}
-
-			function deleteCookie() {
-				setCookie('cname', '', -1);
-			}
-			//set cookie on click
-			$('.accept-cookie').click(function() {
-
-				setCookie("cname", "cvalue", 365);
-
-				cookieContent.hide();
-
-				sessionStorage.setItem('cookie', true);
-
-			});
-
-			$('.decline-cookie').click(function() {
-
-				deleteCookie();
-
-				document.getElementById('deleting').innerHTML = "deleting cookies..."
-				sessionStorage.setItem('cookie', false);
-				document.getElementById('scompare').style.display = 'none'
-				setTimeout(
-					function() {
-						document.getElementById('deleting').innerHTML = "cookies deleted"
-					}, 3000);
-				setTimeout(
-					function() {
-						cookieContent.hide();
-					}, 4000);
-			});
-		});
-	</script>
-	<!-- fine cookie -->
-
-
-	<div class="menudesktop">
-		<div class="wrapper" id="top">
-			<div class="fixed-wrapper">
-				<div class="fixed_menu">
-					<!-- Menù desktop orizzontale -->
-
-					<div>
-						<a href="index.html"><img src="images2/logo.png" class="logo"></a>
-					</div>
-
-
-					<ul>
-						<li><a href="comingsoon.html">ABOUT</a></li>
-						<li><a href="coronavirus/index.html">COVID-19</a></li>
-						<li><a href="tradingdeath.html">TRADING DEATH</a></li>
-						<li><a href="getstarted.html">GET STARTED</a></li>
-					</ul>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="menumobile">
-		<div class="wrapper" id="top">
-			<div class="fixed-wrapper">
-				<div class="fixed_menu">
-					<button id="burger" class="open-main-nav">
-						<span class="burger"></span>
-					</button>
-					<nav class="main-nav" id="main-nav">
-						<ul>
-							<li><a href="index.html">HOME</a></li>
-							<li><a href="getstarted.html">GET STARTED</a></li>
-							<li><a href="tradingdeath.html">TRADING DEATH</a></li>
-							<li><a href="coronavirus/index.html">COVID-19</a></li>
-							<li><a href="comingsoon.html">ABOUT</a></li>
-							<li>
-								<a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 30px; padding-right: 8px; display: inline">
-									<i class="fab fa-twitter-square"></i>
-								</a>
-								<a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 30px;display: inline">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-						</ul>
-					</nav>
-					<div>
-						<a href="index.html"><img src="images2/logo.png" class="logo"></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<!-- Script menu mobile -->
-
-	<script>
-		let burger = document.getElementById('burger'),
-			nav = document.getElementById('main-nav');
-		burger.addEventListener('click', function(e) {
-			this.classList.toggle('is-open');
-			nav.classList.toggle('is-open');
-		});
-
-		let clickEvent = new Event('click');
-	</script>
-
-<!-- Contenuto pagina -->
-
-	<div id="back" class="hero-image" style="z-index: 0">
-		<div style="margin-top: 20vh;position: absolute;">
-			<h1 id="random">death–based</h1>
-			<h1 id="random2">currency</h1>
-		</div>
-		<div id="approach" class="approach">A NEW APPROACH</div>
-		<div id="approach2" class="approach2">TO CURRENCY</div>
-		<div id="globo" class="globo"><img src="images2/globe2.png"></div>
-		<div id="globo_m" class="globo_m"><img src="images2/globe_m2.png"></div>
-		<br>
-		<div id="head" style="color:#9fdc8d">
-
-			Discover us at Supersalone in Milan. <br> 5-10 September 2021
-
-		</div>
-	</div>
-
-
-	<div id="workarea" style="z-index: 1;">
-		<div class="position">
-			<div class="svg-wrapper">
-				<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-					<rect id="shape" height="40" width="150" />
-					<div id="text">
-						<a href="getstarted.html" style="font-family: 'Px Grotesk Bold';"><span class="spot"></span>Get Started</a>
-					</div>
-				</svg>
-			</div>
-		</div>
-	</div>
-
-
-	<script>
-
-	$('.scroll-down').click(function() {
-		$('html, body').animate({
-			scrollTop: $($(this).attr('href')).offset().top
-		}, 500);
-		return false;
-	});
-
-		// paralasse hero
-
-		$.fn.parallax = function(resistance, mouse) {
-			$el = $(this);
-
-			TweenLite.to($el, 0.2, {
-				x: -((mouse.clientX - window.innerWidth / 2) / resistance),
-				y: -((mouse.clientY - window.innerHeight / 2) / resistance)
-			});
-		};
-
-		$(document).mousemove(function(e) {
-			$("#globo img").parallax(120, e);
-			$(".approach").parallax(-80, e);
-			$(".approach2").parallax(-50, e);
-		});
-
-		function WordShuffler(holder, opt) {
-			var that = this;
-			var time = 0;
-			this.now;
-			this.then = Date.now();
-			this.delta;
-			this.currentTimeOffset = 0;
-			this.word = null;
-			this.currentWord = null;
-			this.currentCharacter = 0;
-			this.currentWordLength = 0;
-
-			var options = {
-				fps: 24,
-				timeOffset: 10,
-				textColor: '#f03068',
-				fontSize: "150vh",
-				textAlign: "center",
-				letterSpacing: "-2px",
-				useCanvas: false,
-				mixCapital: false,
-				mixSpecialCharacters: false,
-				needUpdate: true,
-				colors: [
-					'rgba(240, 48, 104, 0.5)',
-
-				]
-			}
-
-			if (typeof opt != "undefined") {
-				for (key in opt) {
-					options[key] = opt[key];
-				}
-			}
-			this.needUpdate = true;
-			this.fps = options.fps;
-			this.interval = 700 / this.fps;
-			this.timeOffset = options.timeOffset;
-			this.textColor = options.textColor;
-			this.fontSize = options.fontSize;
-			this.textAlign = options.textAlign;
-			this.mixCapital = options.mixCapital;
-			this.mixSpecialCharacters = options.mixSpecialCharacters;
-			this.colors = options.colors;
-			this.useCanvas = options.useCanvas;
-			this.chars = [
-				'a', 'b', 'c', 'd',
-				'e', 'f', 'g', 'h',
-				'i', 'j', 'k', 'l',
-				'm', 'n', 'o', 'p',
-				'q', 'r', 's', 't',
-				'u', 'v', 'w', 'x',
-				'y', 'z'
-			];
-			this.specialCharacters = [
-				'!', '§', '$', '%',
-				'&', '/', '(', ')',
-				'=', '?', '_', '<',
-				'>', '^', '°', '*',
-				'#', '-', ':', ';',
-				'~'
-			]
-			if (this.mixSpecialCharacters) {
-				this.chars = this.chars.concat(this.specialCharacters);
-			}
-			this.getRandomColor = function() {
-				var randNum = Math.floor(Math.random() * this.colors.length);
-				return this.colors[randNum];
-
-			}
-			//if Canvas
-			this.position = {
-				x: 0,
-				y: 300
-			}
-			//if DOM
-			if (typeof holder != "undefined") {
-				this.holder = holder;
-			}
-			if (!this.useCanvas && typeof this.holder == "undefined") {
-			}
-			this.getRandCharacter = function(characterToReplace) {
-				if (characterToReplace == " ") {
-					return ' ';
-				}
-				var randNum = Math.floor(Math.random() * this.chars.length);
-				var lowChoice = -.5 + Math.random();
-				var picketCharacter = this.chars[randNum];
-				var choosen = picketCharacter.toLowerCase();
-				if (this.mixCapital) {
-					choosen = lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
-				}
-				return choosen;
-			}
-			this.writeWord = function(word) {
-				this.word = word;
-				this.currentWord = word.split('');
-				this.currentWordLength = this.currentWord.length;
-			}
-			this.generateSingleCharacter = function(color, character) {
-				var span = document.createElement('span');
-				span.style.color = color;
-				span.innerHTML = character;
-				return span;
-			}
-			this.updateCharacter = function(time) {
-				this.now = Date.now();
-				this.delta = this.now - this.then;
-				if (this.delta > this.interval) {
-					this.currentTimeOffset++;
-					var word = [];
-					if (this.currentTimeOffset === this.timeOffset && this.currentCharacter !== this.currentWordLength) {
-						this.currentCharacter++;
-						this.currentTimeOffset = 0;
-					}
-					for (var k = 0; k < this.currentCharacter; k++) {
-						word.push(this.currentWord[k]);
-					}
-					for (var i = 0; i < this.currentWordLength - this.currentCharacter; i++) {
-						word.push(this.getRandCharacter(this.currentWord[this.currentCharacter + i]));
-					}
-					if (that.useCanvas) {
-						c.clearRect(0, 0, stage.x * stage.dpr, stage.y * stage.dpr);
-						c.font = that.fontSize + " sans-serif";
-						var spacing = 0;
-						word.forEach(function(w, index) {
-							if (index > that.currentCharacter) {
-								c.fillStyle = that.getRandomColor();
-							} else {
-								c.fillStyle = that.textColor;
-							}
-							c.fillText(w, that.position.x + spacing, that.position.y);
-							spacing += c.measureText(w).width;
-						});
-					} else {
-						if (that.currentCharacter === that.currentWordLength) {
-							that.needUpdate = false;
-						}
-						this.holder.innerHTML = '';
-						word.forEach(function(w, index) {
-							var color = null
-							if (index > that.currentCharacter) {
-								color = that.getRandomColor();
-							} else {
-								color = that.textColor;
-							}
-							that.holder.appendChild(that.generateSingleCharacter(color, w));
-						});
-					}
-					this.then = this.now - (this.delta % this.interval);
-				}
-			}
-			this.restart = function() {
-				this.currentCharacter = 0;
-				this.needUpdate = true;
-			}
-
-			function update(time) {
-				time++;
-				if (that.needUpdate) {
-					that.updateCharacter(time);
-				}
-				requestAnimationFrame(update);
-			}
-			this.writeWord(this.holder.innerHTML);
-			update(time);
-		}
-		var headline = document.getElementById('random');
-		var text = document.getElementById('text');
-		var shuffler = document.getElementById('shuffler');
-		var headText = new WordShuffler(headline, {
-			textColor: '#f03068',
-			timeOffset: 2,
-			mixCapital: true,
-			mixSpecialCharacters: true
-		});
-
-		function WordShuffler(holder, opt) {
-			var that = this;
-			var time = 0;
-			this.now;
-			this.then = Date.now();
-			this.delta;
-			this.currentTimeOffset = 0;
-			this.word = null;
-			this.currentWord = null;
-			this.currentCharacter = 0;
-			this.currentWordLength = 0;
-			var options = {
-				fps: 24,
-				timeOffset: 10,
-				textColor: '#f03068',
-				fontSize: "150vh",
-				textAlign: "center",
-				letterSpacing: "-2px",
-				useCanvas: false,
-				mixCapital: false,
-				mixSpecialCharacters: false,
-				needUpdate: true,
-				colors: [
-					'rgba(240, 48, 104, 0.5)',
-				]
-			}
-			if (typeof opt != "undefined") {
-				for (key in opt) {
-					options[key] = opt[key];
-				}
-			}
-			this.needUpdate = true;
-			this.fps = options.fps;
-			this.interval = 700 / this.fps;
-			this.timeOffset = options.timeOffset;
-			this.textColor = options.textColor;
-			this.fontSize = options.fontSize;
-			this.textAlign = options.textAlign;
-			this.mixCapital = options.mixCapital;
-			this.mixSpecialCharacters = options.mixSpecialCharacters;
-			this.colors = options.colors;
-			this.useCanvas = options.useCanvas;
-			this.chars = [
-				'a', 'b', 'c', 'd',
-				'e', 'f', 'g', 'h',
-				'i', 'j', 'k', 'l', 'm', 'n',
-				's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-			];
-			this.specialCharacters = [
-				'!', '§', '$', '%',
-				'&', '/', '(', ')',
-				'=', '?', '_', '<',
-				'>', '^', '°', '*',
-				'#', '-', ':', ';', '~'
-			]
-			if (this.mixSpecialCharacters) {
-				this.chars = this.chars.concat(this.specialCharacters);
-			}
-			this.getRandomColor = function() {
-				var randNum = Math.floor(Math.random() * this.colors.length);
-				return this.colors[randNum];
-
-			}
-			//if Canvas
-			this.position = {
-				x: 0,
-				y: 300
-			}
-			//if DOM
-			if (typeof holder != "undefined") {
-				this.holder = holder;
-			}
-			if (!this.useCanvas && typeof this.holder == "undefined") {
-			}
-
-			this.getRandCharacter = function(characterToReplace) {
-				if (characterToReplace == " ") {
-					return ' ';
-				}
-				var randNum = Math.floor(Math.random() * this.chars.length);
-				var lowChoice = -.5 + Math.random();
-				var picketCharacter = this.chars[randNum];
-				var choosen = picketCharacter.toLowerCase();
-				if (this.mixCapital) {
-					choosen = lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
-				}
-				return choosen;
-			}
-			this.writeWord = function(word) {
-				this.word = word;
-				this.currentWord = word.split('');
-				this.currentWordLength = this.currentWord.length;
-			}
-			this.generateSingleCharacter = function(color, character) {
-				var span = document.createElement('span');
-				span.style.color = color;
-				span.innerHTML = character;
-				return span;
-			}
-			this.updateCharacter = function(time) {
-				this.now = Date.now();
-				this.delta = this.now - this.then;
-				if (this.delta > this.interval) {
-					this.currentTimeOffset++;
-					var word = [];
-					if (this.currentTimeOffset === this.timeOffset && this.currentCharacter !== this.currentWordLength) {
-						this.currentCharacter++;
-						this.currentTimeOffset = 0;
-					}
-					for (var k = 0; k < this.currentCharacter; k++) {
-						word.push(this.currentWord[k]);
-					}
-					for (var i = 0; i < this.currentWordLength - this.currentCharacter; i++) {
-						word.push(this.getRandCharacter(this.currentWord[this.currentCharacter + i]));
-					}
-					if (that.useCanvas) {
-						c.clearRect(0, 0, stage.x * stage.dpr, stage.y * stage.dpr);
-						c.font = that.fontSize + " sans-serif";
-						var spacing = 0;
-						word.forEach(function(w, index) {
-							if (index > that.currentCharacter) {
-								c.fillStyle = that.getRandomColor();
-							} else {
-								c.fillStyle = that.textColor;
-							}
-							c.fillText(w, that.position.x + spacing, that.position.y);
-							spacing += c.measureText(w).width;
-						});
-					} else {
-						if (that.currentCharacter === that.currentWordLength) {
-							that.needUpdate = false;
-						}
-						this.holder.innerHTML = '';
-						word.forEach(function(w, index) {
-							var color = null
-							if (index > that.currentCharacter) {
-								color = that.getRandomColor();
-							} else {
-								color = that.textColor;
-							}
-							that.holder.appendChild(that.generateSingleCharacter(color, w));
-						});
-					}
-					this.then = this.now - (this.delta % this.interval);
-				}
-			}
-			this.restart = function() {
-				this.currentCharacter = 0;
-				this.needUpdate = true;
-			}
-
-			function update(time) {
-				time++;
-				if (that.needUpdate) {
-					that.updateCharacter(time);
-				}
-				requestAnimationFrame(update);
-			}
-			this.writeWord(this.holder.innerHTML);
-			update(time);
-		}
-		var headline2 = document.getElementById('random2');
-		var text2 = document.getElementById('text2');
-		var shuffler2 = document.getElementById('shuffler2');
-		var headText2 = new WordShuffler(headline2, {
-			textColor: '#f03068',
-			timeOffset: 2,
-			mixCapital: true,
-			mixSpecialCharacters: true
-		});
-	</script>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="shortcut icon" type="image/png" href="images2/favicon.png" />
+      <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+      <link rel="apple-touch-icon" sizes="180x180" href="touchbar_icon.png">
+      <title>Micromort | Death Speculative Design</title>
+      <meta name="description" content="Official account of the only existing death-based currency. Trading death has never been so convenient. Start now">
+      <meta name="keywords" content="speculative design, interaction design, experience design, currency, death, communication design, politecnico di milano, laboratorio di sintesi finale c1">
+      <meta name="author" content="Alvise Aspesi, Carlotta Bacchini, Elisa Carbone, Pietro Forino, Davide Peruchini, Enzo Fung Taboada">
+   </head>
+   <style media="screen">
+      @media only screen and (max-width: 500px) {
+      body {
+      overflow: hidden;
+      }
+      }
+   </style>
+   <body>
+      <!-- Inizio cookie -->
+      <div class="cookie-disclaimer">
+         <div class="container_cookie">
+            <button type="button" class="accetta accept-cookie" style="right: 14%;" id="scompare">Accept</button>
+            <button type="button" class="declina decline-cookie" style="right: 8%;" id="deleting">Decline</button>
+            <p class="cookie_testo">Micromort uses cookies to provide features on our sites and applications to improve your online experience. See our <a href="policy.html" style="color:#031109">Privacy Policy</a> for more information about cookies. By
+               continuing to use our sites and applications, you agree to our use of cookies.
+            </p>
+         </div>
+      </div>
+      <script>
+         jQuery(document).ready(function() {
+         	var cookie = false;
+         	var cookieContent = $('.cookie-disclaimer');
+         	checkCookie();
+         	var controllaCookie = sessionStorage.getItem('cookie');
+         	if (controllaCookie === 'true') {
+         		cookieContent.hide();
+         	}
+         
+         	function setCookie(cname, cvalue, exdays) {
+         		var d = new Date();
+         		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+         		var expires = "expires=" + d.toGMTString();
+         		document.cookie = cname + "=" + cvalue + "; " + expires;
+         	}
+         
+         	function getCookie(cname) {
+         		var name = cname + "=";
+         		var ca = document.cookie.split(';');
+         		for (var i = 0; i < ca.length; i++) {
+         			var c = ca[i].trim();
+         			if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+         		}
+         		return "";
+         	}
+         
+         	function checkCookie() {
+         		var user = getCookie("username");
+         		if (user !== "") {
+         			cookie = true;
+         		} else {
+         			if (user !== "" && user !== null) {
+         				setCookie("cvalue", "cvalue", 365);
+         			}
+         		}
+         	}
+         
+         	function deleteCookie() {
+         		setCookie('cname', '', -1);
+         	}
+         	//set cookie on click
+         	$('.accept-cookie').click(function() {
+         
+         		setCookie("cname", "cvalue", 365);
+         
+         		cookieContent.hide();
+         
+         		sessionStorage.setItem('cookie', true);
+         
+         	});
+         
+         	$('.decline-cookie').click(function() {
+         
+         		deleteCookie();
+         
+         		document.getElementById('deleting').innerHTML = "deleting cookies..."
+         		sessionStorage.setItem('cookie', false);
+         		document.getElementById('scompare').style.display = 'none'
+         		setTimeout(
+         			function() {
+         				document.getElementById('deleting').innerHTML = "cookies deleted"
+         			}, 3000);
+         		setTimeout(
+         			function() {
+         				cookieContent.hide();
+         			}, 4000);
+         	});
+         });
+      </script>
+      <!-- fine cookie -->
+      <div class="menudesktop">
+         <div class="wrapper" id="top">
+            <div class="fixed-wrapper">
+               <div class="fixed_menu">
+                  <!-- Menù desktop orizzontale -->
+                  <div>
+                     <a href="index.html"><img src="images2/logo.png" class="logo"></a>
+                  </div>
+                  <ul>
+                     <li><a href="comingsoon.html">ABOUT</a></li>
+                     <li><a href="coronavirus/index.html">COVID-19</a></li>
+                     <li><a href="tradingdeath.html">TRADING DEATH</a></li>
+                     <li><a href="getstarted.html">GET STARTED</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="menumobile">
+         <div class="wrapper" id="top">
+            <div class="fixed-wrapper">
+               <div class="fixed_menu">
+                  <button id="burger" class="open-main-nav">
+                  <span class="burger"></span>
+                  </button>
+                  <nav class="main-nav" id="main-nav">
+                     <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="getstarted.html">GET STARTED</a></li>
+                        <li><a href="tradingdeath.html">TRADING DEATH</a></li>
+                        <li><a href="coronavirus/index.html">COVID-19</a></li>
+                        <li><a href="comingsoon.html">ABOUT</a></li>
+                        <li>
+                           <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 30px; padding-right: 8px; display: inline">
+                           <i class="fab fa-twitter-square"></i>
+                           </a>
+                           <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 30px;display: inline">
+                           <i class="fab fa-instagram"></i>
+                           </a>
+                        </li>
+                     </ul>
+                  </nav>
+                  <div>
+                     <a href="index.html"><img src="images2/logo.png" class="logo"></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Script menu mobile -->
+      <script>
+         let burger = document.getElementById('burger'),
+         	nav = document.getElementById('main-nav');
+         burger.addEventListener('click', function(e) {
+         	this.classList.toggle('is-open');
+         	nav.classList.toggle('is-open');
+         });
+         
+         let clickEvent = new Event('click');
+      </script>
+      <!-- Contenuto pagina -->
+      <div id="back" class="hero-image" style="z-index: 0">
+         <div style="margin-top: 20vh;position: absolute;">
+            <h1 id="random">death–based</h1>
+            <h1 id="random2">currency</h1>
+         </div>
+         <div id="approach" class="approach">A NEW APPROACH</div>
+         <div id="approach2" class="approach2">TO CURRENCY</div>
+         <div id="globo" class="globo"><img src="images2/globe2.png"></div>
+         <div id="globo_m" class="globo_m"><img src="images2/globe_m2.png"></div>
+         <br>
+         <div id="head" style="color:#9fdc8d">
+            Discover us at Supersalone in Milan. <br> 5-10 September 2021
+         </div>
+      </div>
+      <div id="workarea" style="z-index: 1;">
+         <div class="position">
+            <div class="svg-wrapper">
+               <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                  <rect id="shape" height="40" width="150" />
+                  <div id="text">
+                     <a href="getstarted.html" style="font-family: 'Px Grotesk Bold';"><span class="spot"></span>Get Started</a>
+                  </div>
+               </svg>
+            </div>
+         </div>
+      </div>
+      <script>
+         $('.scroll-down').click(function() {
+         	$('html, body').animate({
+         		scrollTop: $($(this).attr('href')).offset().top
+         	}, 500);
+         	return false;
+         });
+         
+         	// paralasse hero
+         
+         	$.fn.parallax = function(resistance, mouse) {
+         		$el = $(this);
+         
+         		TweenLite.to($el, 0.2, {
+         			x: -((mouse.clientX - window.innerWidth / 2) / resistance),
+         			y: -((mouse.clientY - window.innerHeight / 2) / resistance)
+         		});
+         	};
+         
+         	$(document).mousemove(function(e) {
+         		$("#globo img").parallax(120, e);
+         		$(".approach").parallax(-80, e);
+         		$(".approach2").parallax(-50, e);
+         	});
+         
+         	function WordShuffler(holder, opt) {
+         		var that = this;
+         		var time = 0;
+         		this.now;
+         		this.then = Date.now();
+         		this.delta;
+         		this.currentTimeOffset = 0;
+         		this.word = null;
+         		this.currentWord = null;
+         		this.currentCharacter = 0;
+         		this.currentWordLength = 0;
+         
+         		var options = {
+         			fps: 24,
+         			timeOffset: 10,
+         			textColor: '#f03068',
+         			fontSize: "150vh",
+         			textAlign: "center",
+         			letterSpacing: "-2px",
+         			useCanvas: false,
+         			mixCapital: false,
+         			mixSpecialCharacters: false,
+         			needUpdate: true,
+         			colors: [
+         				'rgba(240, 48, 104, 0.5)',
+         
+         			]
+         		}
+         
+         		if (typeof opt != "undefined") {
+         			for (key in opt) {
+         				options[key] = opt[key];
+         			}
+         		}
+         		this.needUpdate = true;
+         		this.fps = options.fps;
+         		this.interval = 700 / this.fps;
+         		this.timeOffset = options.timeOffset;
+         		this.textColor = options.textColor;
+         		this.fontSize = options.fontSize;
+         		this.textAlign = options.textAlign;
+         		this.mixCapital = options.mixCapital;
+         		this.mixSpecialCharacters = options.mixSpecialCharacters;
+         		this.colors = options.colors;
+         		this.useCanvas = options.useCanvas;
+         		this.chars = [
+         			'a', 'b', 'c', 'd',
+         			'e', 'f', 'g', 'h',
+         			'i', 'j', 'k', 'l',
+         			'm', 'n', 'o', 'p',
+         			'q', 'r', 's', 't',
+         			'u', 'v', 'w', 'x',
+         			'y', 'z'
+         		];
+         		this.specialCharacters = [
+         			'!', '§', '$', '%',
+         			'&', '/', '(', ')',
+         			'=', '?', '_', '<',
+         			'>', '^', '°', '*',
+         			'#', '-', ':', ';',
+         			'~'
+         		]
+         		if (this.mixSpecialCharacters) {
+         			this.chars = this.chars.concat(this.specialCharacters);
+         		}
+         		this.getRandomColor = function() {
+         			var randNum = Math.floor(Math.random() * this.colors.length);
+         			return this.colors[randNum];
+         
+         		}
+         		//if Canvas
+         		this.position = {
+         			x: 0,
+         			y: 300
+         		}
+         		//if DOM
+         		if (typeof holder != "undefined") {
+         			this.holder = holder;
+         		}
+         		if (!this.useCanvas && typeof this.holder == "undefined") {
+         		}
+         		this.getRandCharacter = function(characterToReplace) {
+         			if (characterToReplace == " ") {
+         				return ' ';
+         			}
+         			var randNum = Math.floor(Math.random() * this.chars.length);
+         			var lowChoice = -.5 + Math.random();
+         			var picketCharacter = this.chars[randNum];
+         			var choosen = picketCharacter.toLowerCase();
+         			if (this.mixCapital) {
+         				choosen = lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
+         			}
+         			return choosen;
+         		}
+         		this.writeWord = function(word) {
+         			this.word = word;
+         			this.currentWord = word.split('');
+         			this.currentWordLength = this.currentWord.length;
+         		}
+         		this.generateSingleCharacter = function(color, character) {
+         			var span = document.createElement('span');
+         			span.style.color = color;
+         			span.innerHTML = character;
+         			return span;
+         		}
+         		this.updateCharacter = function(time) {
+         			this.now = Date.now();
+         			this.delta = this.now - this.then;
+         			if (this.delta > this.interval) {
+         				this.currentTimeOffset++;
+         				var word = [];
+         				if (this.currentTimeOffset === this.timeOffset && this.currentCharacter !== this.currentWordLength) {
+         					this.currentCharacter++;
+         					this.currentTimeOffset = 0;
+         				}
+         				for (var k = 0; k < this.currentCharacter; k++) {
+         					word.push(this.currentWord[k]);
+         				}
+         				for (var i = 0; i < this.currentWordLength - this.currentCharacter; i++) {
+         					word.push(this.getRandCharacter(this.currentWord[this.currentCharacter + i]));
+         				}
+         				if (that.useCanvas) {
+         					c.clearRect(0, 0, stage.x * stage.dpr, stage.y * stage.dpr);
+         					c.font = that.fontSize + " sans-serif";
+         					var spacing = 0;
+         					word.forEach(function(w, index) {
+         						if (index > that.currentCharacter) {
+         							c.fillStyle = that.getRandomColor();
+         						} else {
+         							c.fillStyle = that.textColor;
+         						}
+         						c.fillText(w, that.position.x + spacing, that.position.y);
+         						spacing += c.measureText(w).width;
+         					});
+         				} else {
+         					if (that.currentCharacter === that.currentWordLength) {
+         						that.needUpdate = false;
+         					}
+         					this.holder.innerHTML = '';
+         					word.forEach(function(w, index) {
+         						var color = null
+         						if (index > that.currentCharacter) {
+         							color = that.getRandomColor();
+         						} else {
+         							color = that.textColor;
+         						}
+         						that.holder.appendChild(that.generateSingleCharacter(color, w));
+         					});
+         				}
+         				this.then = this.now - (this.delta % this.interval);
+         			}
+         		}
+         		this.restart = function() {
+         			this.currentCharacter = 0;
+         			this.needUpdate = true;
+         		}
+         
+         		function update(time) {
+         			time++;
+         			if (that.needUpdate) {
+         				that.updateCharacter(time);
+         			}
+         			requestAnimationFrame(update);
+         		}
+         		this.writeWord(this.holder.innerHTML);
+         		update(time);
+         	}
+         	var headline = document.getElementById('random');
+         	var text = document.getElementById('text');
+         	var shuffler = document.getElementById('shuffler');
+         	var headText = new WordShuffler(headline, {
+         		textColor: '#f03068',
+         		timeOffset: 2,
+         		mixCapital: true,
+         		mixSpecialCharacters: true
+         	});
+         
+         	function WordShuffler(holder, opt) {
+         		var that = this;
+         		var time = 0;
+         		this.now;
+         		this.then = Date.now();
+         		this.delta;
+         		this.currentTimeOffset = 0;
+         		this.word = null;
+         		this.currentWord = null;
+         		this.currentCharacter = 0;
+         		this.currentWordLength = 0;
+         		var options = {
+         			fps: 24,
+         			timeOffset: 10,
+         			textColor: '#f03068',
+         			fontSize: "150vh",
+         			textAlign: "center",
+         			letterSpacing: "-2px",
+         			useCanvas: false,
+         			mixCapital: false,
+         			mixSpecialCharacters: false,
+         			needUpdate: true,
+         			colors: [
+         				'rgba(240, 48, 104, 0.5)',
+         			]
+         		}
+         		if (typeof opt != "undefined") {
+         			for (key in opt) {
+         				options[key] = opt[key];
+         			}
+         		}
+         		this.needUpdate = true;
+         		this.fps = options.fps;
+         		this.interval = 700 / this.fps;
+         		this.timeOffset = options.timeOffset;
+         		this.textColor = options.textColor;
+         		this.fontSize = options.fontSize;
+         		this.textAlign = options.textAlign;
+         		this.mixCapital = options.mixCapital;
+         		this.mixSpecialCharacters = options.mixSpecialCharacters;
+         		this.colors = options.colors;
+         		this.useCanvas = options.useCanvas;
+         		this.chars = [
+         			'a', 'b', 'c', 'd',
+         			'e', 'f', 'g', 'h',
+         			'i', 'j', 'k', 'l', 'm', 'n',
+         			's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+         		];
+         		this.specialCharacters = [
+         			'!', '§', '$', '%',
+         			'&', '/', '(', ')',
+         			'=', '?', '_', '<',
+         			'>', '^', '°', '*',
+         			'#', '-', ':', ';', '~'
+         		]
+         		if (this.mixSpecialCharacters) {
+         			this.chars = this.chars.concat(this.specialCharacters);
+         		}
+         		this.getRandomColor = function() {
+         			var randNum = Math.floor(Math.random() * this.colors.length);
+         			return this.colors[randNum];
+         
+         		}
+         		//if Canvas
+         		this.position = {
+         			x: 0,
+         			y: 300
+         		}
+         		//if DOM
+         		if (typeof holder != "undefined") {
+         			this.holder = holder;
+         		}
+         		if (!this.useCanvas && typeof this.holder == "undefined") {
+         		}
+         
+         		this.getRandCharacter = function(characterToReplace) {
+         			if (characterToReplace == " ") {
+         				return ' ';
+         			}
+         			var randNum = Math.floor(Math.random() * this.chars.length);
+         			var lowChoice = -.5 + Math.random();
+         			var picketCharacter = this.chars[randNum];
+         			var choosen = picketCharacter.toLowerCase();
+         			if (this.mixCapital) {
+         				choosen = lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
+         			}
+         			return choosen;
+         		}
+         		this.writeWord = function(word) {
+         			this.word = word;
+         			this.currentWord = word.split('');
+         			this.currentWordLength = this.currentWord.length;
+         		}
+         		this.generateSingleCharacter = function(color, character) {
+         			var span = document.createElement('span');
+         			span.style.color = color;
+         			span.innerHTML = character;
+         			return span;
+         		}
+         		this.updateCharacter = function(time) {
+         			this.now = Date.now();
+         			this.delta = this.now - this.then;
+         			if (this.delta > this.interval) {
+         				this.currentTimeOffset++;
+         				var word = [];
+         				if (this.currentTimeOffset === this.timeOffset && this.currentCharacter !== this.currentWordLength) {
+         					this.currentCharacter++;
+         					this.currentTimeOffset = 0;
+         				}
+         				for (var k = 0; k < this.currentCharacter; k++) {
+         					word.push(this.currentWord[k]);
+         				}
+         				for (var i = 0; i < this.currentWordLength - this.currentCharacter; i++) {
+         					word.push(this.getRandCharacter(this.currentWord[this.currentCharacter + i]));
+         				}
+         				if (that.useCanvas) {
+         					c.clearRect(0, 0, stage.x * stage.dpr, stage.y * stage.dpr);
+         					c.font = that.fontSize + " sans-serif";
+         					var spacing = 0;
+         					word.forEach(function(w, index) {
+         						if (index > that.currentCharacter) {
+         							c.fillStyle = that.getRandomColor();
+         						} else {
+         							c.fillStyle = that.textColor;
+         						}
+         						c.fillText(w, that.position.x + spacing, that.position.y);
+         						spacing += c.measureText(w).width;
+         					});
+         				} else {
+         					if (that.currentCharacter === that.currentWordLength) {
+         						that.needUpdate = false;
+         					}
+         					this.holder.innerHTML = '';
+         					word.forEach(function(w, index) {
+         						var color = null
+         						if (index > that.currentCharacter) {
+         							color = that.getRandomColor();
+         						} else {
+         							color = that.textColor;
+         						}
+         						that.holder.appendChild(that.generateSingleCharacter(color, w));
+         					});
+         				}
+         				this.then = this.now - (this.delta % this.interval);
+         			}
+         		}
+         		this.restart = function() {
+         			this.currentCharacter = 0;
+         			this.needUpdate = true;
+         		}
+         
+         		function update(time) {
+         			time++;
+         			if (that.needUpdate) {
+         				that.updateCharacter(time);
+         			}
+         			requestAnimationFrame(update);
+         		}
+         		this.writeWord(this.holder.innerHTML);
+         		update(time);
+         	}
+         	var headline2 = document.getElementById('random2');
+         	var text2 = document.getElementById('text2');
+         	var shuffler2 = document.getElementById('shuffler2');
+         	var headText2 = new WordShuffler(headline2, {
+         		textColor: '#f03068',
+         		timeOffset: 2,
+         		mixCapital: true,
+         		mixSpecialCharacters: true
+         	});
+      </script>
+   </body>
