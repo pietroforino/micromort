@@ -1,572 +1,438 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" type="image/png" href="images2/favicon.png" />
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <title>Micromort | Trading death</title>
-
-  <meta name="description" content="Official account of the only existing death-based currency. Trading death has never been so convenient. Start now">
-  <meta name="keywords" content="speculative design, interaction design, experience design, currency, death">
-  <meta name="author" content="Alvise Aspesi, Carlotta Bacchini, Elisa Carbone, Pietro Forino, Davide Peruchini, Enzo Fung Taboada">
-
-  <script>
-    $(document).ready(function() {
-      var contentSection = $('.content-section');
-      var navigation = $('.freccia');
-
-      //when a nav link is clicked, smooth scroll to the section
-
-      navigation.on('click', 'a', function(event) {
-        event.preventDefault(); //prevents previous event
-        smoothScroll($(this.hash));
-
-      });
-
-      //update navigation on scroll...
-
-      $(window).on('scroll', function() {
-        updateNavigation();
-
-      })
-
-      //...and when the page starts
-
-      updateNavigation();
-
-      /////FUNCTIONS
-
-      function updateNavigation() {
-        contentSection.each(function() {
-          var sectionName = $(this).attr('id');
-          var navigationMatch = $('nav a[href="#' + sectionName + '"]');
-          if (($(this).offset().top - $(window).height() / 2 < $(window).scrollTop()) &&
-            ($(this).offset().top + $(this).height() - $(window).height() / 2 > $(window).scrollTop())) {
-            navigationMatch.addClass('active-section');
-          } else {
-            navigationMatch.removeClass('active-section');
-          }
-        });
-      }
-
-      function smoothScroll(target) {
-        $('body,html').animate({
-          scrollTop: target.offset().top - 100
-        }, 800);
-
-      }
-    });
-  </script>
-
-</head>
-
-<body style="background-repeat: repeat; background-size: contain;opacity:30;">
-
-
-  <!-- Inizio cookie -->
-  <div class="cookie-disclaimer">
-    <div class="container_cookie">
-      <button type="button" class="accetta accept-cookie" style="right: 14%;" id="scompare">Accept</button>
-      <button type="button" class="declina decline-cookie" style="right: 8%;" id="deleting">Decline</button>
-      <p class="cookie_testo">Micromort uses cookies to provide features on our sites and applications to improve your online experience. See our <a href="policy.html" style="color:#031109; margin: 0%;">Privacy Policy</a> for more information about
-        cookies. By continuing to use our sites and applications, you agree to our use of cookies.</p>
-    </div>
-  </div>
-
-  <script>
-    jQuery(document).ready(function() {
-      var cookie = false;
-      var cookieContent = $('.cookie-disclaimer');
-
-      checkCookie();
-
-      var controllaCookie = sessionStorage.getItem('cookie');
-      if (controllaCookie == 'true') {
-        cookieContent.hide();
-      }
-
-      function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        var expires = "expires=" + d.toGMTString();
-        document.cookie = cname + "=" + cvalue + "; " + expires;
-
-      }
-
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i].trim();
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-        }
-
-        return "";
-      }
-
-      function checkCookie() {
-        var user = getCookie("username");
-        if (user !== "") {
-          cookie = true;
-        } else {
-
-          if (user !== "" && user !== null) {
-            setCookie("cvalue", "cvalue", 365);
-          }
-        }
-      }
-
-      function deleteCookie() {
-
-        setCookie('cname', '', -1);
-      }
-
-      $('.accept-cookie').click(function() {
-        setCookie("cname", "cvalue", 365);
-        cookieContent.hide();
-        sessionStorage.setItem('controllaCookie', true);
-
-      });
-      //delete cookie on click
-
-      $('.decline-cookie').click(function() {
-        deleteCookie();
-        document.getElementById('deleting').innerHTML = "deleting cookies..."
-        sessionStorage.setItem('controllaCookie', false);
-        document.getElementById('scompare').style.display = 'none'
-        setTimeout(
-          function()
-
-          {
-
-            document.getElementById('deleting').innerHTML = "cookies deleted"
-          }, 3000);
-        setTimeout(
-          function() {
-            cookieContent.hide();
-          }, 4000);
-      });
-
-    });
-  </script>
-  <!-- fine cookie -->
-
-  <div class="menudesktop">
-		<div class="wrapper" id="top">
-			<div class="fixed-wrapper">
-				<div class="fixed_menu">
-					<!-- Menù desktop orizzontale -->
-
-					<div>
-						<a href="index.html"><img src="images2/logo.png" class="logo"></a>
-					</div>
-
-
-					<ul>
-						<li><a href="comingsoon.html">ABOUT</a></li>
-						<li><a href="coronavirus/index.html">COVID-19</a></li>
-						<li><a href="tradingdeath.html">TRADING DEATH</a></li>
-						<li><a href="getstarted.html">GET STARTED</a></li>
-					</ul>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="menumobile">
-		<div class="wrapper" id="top">
-			<div class="fixed-wrapper">
-				<div class="fixed_menu">
-					<button id="burger" class="open-main-nav">
-						<span class="burger"></span>
-					</button>
-					<nav class="main-nav" id="main-nav">
-						<ul>
-							<li><a href="index.html">HOME</a></li>
-							<li><a href="getstarted.html">GET STARTED</a></li>
-							<li><a href="tradingdeath.html">TRADING DEATH</a></li>
-							<li><a href="coronavirus/index.html">COVID-19</a></li>
-							<li><a href="comingsoon.html">ABOUT</a></li>
-							<li>
-								<a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 30px; padding-right: 8px; display: inline">
-									<i class="fab fa-twitter-square"></i>
-								</a>
-								<a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 30px;display: inline">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-						</ul>
-					</nav>
-					<div>
-						<a href="index.html"><img src="images2/logo.png" class="logo"></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-  <!-- Script menu mobile -->
-
-  <script>
-    let burger = document.getElementById('burger'),
-      nav = document.getElementById('main-nav');
-    burger.addEventListener('click', function(e) {
-      this.classList.toggle('is-open');
-      nav.classList.toggle('is-open');
-    });
-
-    let clickEvent = new Event('click');
-  </script>
-
-  <!-- Contenuto pagina -->
-
-  <div class="hero-text">
-    <div class="getstarted_mobile">trading death</div>
-    <nav class="freccia">
-      <section id="scrolldown" class="demo">
-        <a href="#test"><span></span></a>
-      </section>
-    </nav>
-  </div>
-
-  <div class="getstartedDesktop">
-    <div class="getstarted_desktop">trading death</div>
-    <nav class="fixedmenu">
-      <ul id="sidebar" style="margin-top:10vh;">
-        <li><a href="#section1">01</a></li>
-        <li><a href="#section2">02</a></li>
-        <li><a href="#section3">03</a></li>
-        <li><a href="#section4">04</a></li>
-      </ul>
-    </nav>
-
-    <section id="section1" class="content-section">
-      <div class="teaser">what is</div>
-      <p class="teas">
-        <b>
-        Micromort is a new and innovative currency, whose value is based on human deaths depending
-        on the country in which they take place.</b>
-        <br><br>
-        Today the value of death is perceived differently depending on the place where it occurs and
-        Micromort aims to exploit this factor to make money on the dead thus defining an economic
-        value of death for each nation</p>
-
-      <img style="margin-top:8%; " src="images2/moneta.jpg" width="100%" />
-    </section>
-
-    <section id="section2" class="content-section">
-      <div style="margin-top: 30%" class="teaser2">how it works</div>
-      <p class="teas">For this currency has been created Hades 2.0, a special algorithm, which combines the GDP per capita of each country,
-        the number of deaths in relation to the total population of that country.
-        What is this simple rule?</p>
-
-      <div style="display: inline"><img src="images2/grafico2.png" class="grafico">
-        <h3 class="g1">The more <br> the deaths, the lower the price.</h3>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="shortcut icon" type="image/png" href="images2/favicon.png" />
+      <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+      <title>Micromort | Trading death</title>
+      <meta name="description" content="Official account of the only existing death-based currency. Trading death has never been so convenient. Start now">
+      <meta name="keywords" content="speculative design, interaction design, experience design, currency, death">
+      <meta name="author" content="Alvise Aspesi, Carlotta Bacchini, Elisa Carbone, Pietro Forino, Davide Peruchini, Enzo Fung Taboada">
+      <script>
+         $(document).ready(function() {
+           var contentSection = $('.content-section');
+           var navigation = $('.freccia');
+         
+           //when a nav link is clicked, smooth scroll to the section
+         
+           navigation.on('click', 'a', function(event) {
+             event.preventDefault(); //prevents previous event
+             smoothScroll($(this.hash));
+         
+           });
+         
+           //update navigation on scroll...
+         
+           $(window).on('scroll', function() {
+             updateNavigation();
+         
+           })
+         
+           //...and when the page starts
+         
+           updateNavigation();
+         
+           /////FUNCTIONS
+         
+           function updateNavigation() {
+             contentSection.each(function() {
+               var sectionName = $(this).attr('id');
+               var navigationMatch = $('nav a[href="#' + sectionName + '"]');
+               if (($(this).offset().top - $(window).height() / 2 < $(window).scrollTop()) &&
+                 ($(this).offset().top + $(this).height() - $(window).height() / 2 > $(window).scrollTop())) {
+                 navigationMatch.addClass('active-section');
+               } else {
+                 navigationMatch.removeClass('active-section');
+               }
+             });
+           }
+         
+           function smoothScroll(target) {
+             $('body,html').animate({
+               scrollTop: target.offset().top - 100
+             }, 800);
+         
+           }
+         });
+      </script>
+   </head>
+   <body style="background-repeat: repeat; background-size: contain;opacity:30;">
+      <!-- Inizio cookie -->
+      <div class="cookie-disclaimer">
+         <div class="container_cookie">
+            <button type="button" class="accetta accept-cookie" style="right: 14%;" id="scompare">Accept</button>
+            <button type="button" class="declina decline-cookie" style="right: 8%;" id="deleting">Decline</button>
+            <p class="cookie_testo">Micromort uses cookies to provide features on our sites and applications to improve your online experience. See our <a href="policy.html" style="color:#031109; margin: 0%;">Privacy Policy</a> for more information about
+               cookies. By continuing to use our sites and applications, you agree to our use of cookies.
+            </p>
+         </div>
       </div>
-    </section>
-
-
-    <!-- <script>
-		// $(function() {
-    //
-		// 	//DECLARE GLOBAL VARIABLE FOR USE IN HANDLERS
-		// 	var orig, sib;
-		// 	var runs = 0;
-		// 	var charSet = 'abcdefghijklmnopqrstuvwxyz1234567890+>?-$@%&*';
-		// 	//RUN JS WHEN 'DISTORT' IS HOVERED
-		// 	$('.g1').hover(function() {
-		// 		var curr = $(this);
-		// 		orig = $(this).text();
-    //
-		// 		sib = setInterval(function() {
-    //
-		// 			distortText(curr);
-		// 		}, 50);
-		// 	}, function() {
-		// 		//RESET THE ORIGINAL TEXT
-		// 		clearInterval(sib);
-		// 		$(this).text(orig);
-		// 	});
-    //
-		// 	function distortText(i) {
-		// 		//MAINTAINS SOME READABILITY IN THE TEXT BY ONLY ALLOWING 3 CHARACTERS TO BE DISTORTED
-		// 		if (runs >= 2) {
-		// 			runs = 0;
-		// 			i.text(orig);
-		// 			return;
-    //
-		// 		}
-		// 		//GET EACH INDIVIDUAL CHARACTER
-    //
-		// 		var chars = i.text().split('');
-    //
-		// 		//GET A RANDOM CHARACTER FROM THE TEXT
-    //
-		// 		var rand = Math.floor(Math.random() * (chars.length));
-    //
-		// 		//GET A RANDOM REPLACEMENT CHARACTER
-		// 		var randRep = Math.floor(Math.random() * (charSet.length));
-    //
-		// 		//CHECK TO MAKE SURE THAT THE NEW CHARACTER IS DIFFERENT FROM THE OLD
-		// 		if (chars[rand] != charSet[randRep] && chars[rand] != ' ') {
-		// 			chars[rand] = charSet[randRep];
-		// 		} else {
-		// 			distortText(i);
-		// 		}
-		// 		//UPDATE TEXT
-		// 		i.text(chars.join(''));
-		// 		runs += 1;
-		// 	}
-		// });
-	</script> -->
-
-
-
-
-    <section id="section3" class="content-section" style="height: 100%;">
-      <div class="teaser3">why is born</div>
-
-      <p class="teas">Micromort aims to make us reflect on the reality in which we live:
-        it is not true that death is the same for everyone. Inevitably it has a social value.
-        And that value, unfortunately, is linked to the place the nation to which it belongs occupies in the world.<br><br>
-        Do you live in the West? You're lucky, your death will be worth a few tens of euros. <br>Do you live in Lesotho?
-        Well, you can hope that the value will rise to one euro one day. <br>Yet, regardless of one's origins, a human life is still a
-        life. And a death is the end of that life. Why then do we place a different value on it? And what is this value? <br><br>
-        <b>Find out at the Lost Graduation Show during Supersalone. We are waiting for you!</b>
-      </p>
-      <img style="margin-top:5%; " src="images2/Micromort.jpg" width="100%" />
-      <img style="margin-top:7%; " src="images2/1.jpg" width="100%" />
-
-    </section>
-
-
-
-    <section id="section4" class="content-section" style="height: 100vh;">
-      <div class="teaser3">in the future</div>
-
-      <p class="teas">Micromort was born in January 2020, just before a worldwide pandemic began. <br>
-        Although it is already a year and a half old, it is still relevant and always thought-provoking.
-        The Covid-19 pandemic was so interesting that it was analysed, both on this website and in the installation
-        <i>The Stock Exchange Experience</i>. <br><br>Even now, in 2021, as the pandemic continues and keeps killing,
-        there is another major global and humanitarian crisis: the Afghan one. Here too, Micromort aims
-        to provoke consciences and make viewers reflect on why the 13 dead American soldiers are more
-        important than the 170 dead Afghan civilians.
-
-      </p>
-      <img style="margin-top:5%; " src="images2/mappa.jpg" width="100%" />
-      <img style="margin-top:5%; " src="images2/kit.gif" alt="this slowpoke moves" width="100%" />
-
-    </section>
-
-
-  </div>
-  </div>
-
-  <div class="footer_desktop" style="max-width: 100%">
-    <table style="border: none">
-      <hr style="border: none">
-      <td class="foot" style="width: 35vw;">
-        <h2 style="border-bottom:1px solid #f03068; font-size: 20px; text-align:left;">About</h2>
-
-        <p style="font-family: 'Px Grotesk Light'; line-height:20px">Micromort is a speculative design innovation on the financial market.
-
-          Micromort is not like any other currency or cryptocurrency: it is deeply different as it responds to different rules.
-
-          Micromort is a death-based currency. </p>
-      </td>
-
-      <td class="foot" style="width: 12vw; padding-left: 100px;">
-
-        <ul>
-          <h2 style="border-bottom:1px solid #f03068; margin-top: 20px; font-size: 20px; text-align:left;">Menu</h2>
-          <li><a href="index.html">homepage</a></li>
-          <li><a href="getstarted.html">get started</a></li>
-          <li><a href="tradingdeath.html">trading death</a></li>
-          <li><a href="comingsoon.html">covid-19</a></li>
-          <li><a href="getstarted.html">about</a></li>
-
-        </ul>
-
-      </td>
-
-      <td class="foot" style="width: 20vw; padding-left: 100px;">
-
-        <h2 style="border-bottom:1px solid #f03068; margin-top: 31px; width: 110%; margin-top: 20px; font-size: 20px; text-align:left; ">Stay in touch</h2>
-        <p style="font-family: 'Px Grotesk Light'"><a class="mail" href="mailto:info@micromort.org">info@micromort.org</a></p>
-
-
-        <ul style="text-align:left">
-          <li style="text-align:left">
-            <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 25px;display: inline"><i class="fab fa-twitter-square"></i></a>
-            <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 25px; padding-left: 10px; display: inline"><i class="fab fa-instagram"></i></a>
-          </li>
-        </ul>
-      </td>
-      </hr>
-    </table>
-  </div>
-
-  <div class="getstartedMobile">
-
-    <div class="intestazione" id="test">01 what is</div>
-
-    <p class="teas"><b>Micromort is a new and innovative currency, whose value
-        is based on human deaths depending on the country in which they take place.</b><br><br>
-      Today the value of death is perceived differently depending on the place where it occurs and
-      Micromort aims to exploit this factor to make money on the dead thus defining an economic value of death for each nation
-    </p>
-    <img style="margin-top:15%; width: 160%; margin-left:-12%" src="images2/moneta.jpg" />
-
-
-    <div class="intestazione" style="margin-top: 65%;">02 how it works</div>
-    <p class="teas">For this currency has been created <i>Hades</i> 2.0, a special algorithm, which combines the GDP per capita of each country,
-      the number of deaths in relation to the total population of that country.
-      What is this simple rule?
-    </p>
-    <div style="display: inline; "><img style="width: 143%; margin-left:-3%" src="images2/grafico2.png" class="grafico">
-      <h3 class="g1" style="margin-left: -22%"><sup>*</sup>The more the deaths, the lower the price.</h3>
-    </div>
-
-
-
-    <div class="intestazione" style="margin-top: 65%;">03 why is born</div>
-    <p class="teas">Micromort aims to make us reflect on the reality in which we live:
-      it is not true that death is the same for everyone. Inevitably it has a social value.
-      And that value, unfortunately, is linked to the place the nation to which it belongs occupies in the world.<br><br>
-      Do you live in the West? You're lucky, your death will be worth a few tens of euros. <br>Do you live in Lesotho?
-      Well, you can hope that the value will rise to one euro one day. <br>Yet, regardless of one's origins, a human life is still a
-      life. And a death is the end of that life. Why then do we place a different value on it? And what is this value? <br><br>
-      <b>Find out at the Lost Graduation Show during Supersalone. We are waiting for you!</b>
-    </p>
-    <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/micromort2.jpg" />
-    <img style="margin-top:15%; width: 160%; margin-left:-12%" src="images2/1.jpg" />
-
-
-    <div class="intestazione" style="margin-top: 65%;">04 in the future</div>
-    <p class="teas">Micromort was born in January 2020, just before a worldwide pandemic began. <br>
-      Although it is already a year and a half old, it is still relevant and always thought-provoking.
-      The Covid-19 pandemic was so interesting that it was analysed, both on this website and in the installation
-      <i>The Stock Exchange Experience</i>. <br><br>Even now, in 2021, as the pandemic continues and keeps killing,
-      there is another major global and humanitarian crisis: the Afghan one. Here too, Micromort aims
-      to provoke consciences and make viewers reflect on why the 13 dead American soldiers are more
-      important than the 170 dead Afghan civilians.
-
-    </p>
-
-    <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/mappa.jpg" width="100%" />
-    <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/kit.gif" alt="this slowpoke moves" width="100%" />
-
-
-    <!-- <script>
-    $.fn.isInViewport = function () {
-    let elementTop = $(this).offset().top;
-    let elementBottom = elementTop + $(this).outerHeight();
-
-    let viewportTop = $(window).scrollTop();
-    let viewportBottom = viewportTop + $(window).height();
-
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
-$(window).scroll(function () {
-    if ($('#section2').isInViewport()) {
-      $('#section2').fadeIn();
-    } else {
-      $('#section2').fadeOut();
-    }
-});
-    </script> -->
-  </div>
-
-  <footer class="footer_mobile">
-    <div style="width: 100%; height: 10px;"></div>
-    <div class="left">
-      <h2 style="border-bottom:1px solid #f03068;">About</h2>
-      <p style="font-family: 'Px Grotesk Light'">
-        Micromort is an innovation on the financial market.
-        Micromort is not like any other currency or cryptocurrency: it is deeply different as it responds to different rules.
-        Micromort is a death-based currency.
-      </p>
-      <h2 style="border-bottom:1px solid #f03068; margin-top: 31px;">Menu</h2>
-      <li><a href="getstarted.html">homepage</a></li>
-      <li><a href="getstarted.html">get started</a></li>
-      <li><a href="comingsoon.html">trading death</a></li>
-      <li><a href="comingsoon.html">covid-19</a></li>
-      <li><a href="getstarted.html">about</a></li>
-      <h2 style="border-bottom:1px solid #f03068; margin-top: 31px;">Stay in touch</h2>
-      <p style="font-family: 'Px Grotesk Light'; padding-left: 0px;"><a class="mail" href="mailto:info@micromort.org">info@micromort.org</a></p>
-      <ul style="margin-bottom:15%;">
-        <li>
-          <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 25px; padding-right: 2px; display: inline"><i class="fab fa-twitter-square"></i></a>
-          <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 25px; display: inline"><i class="fab fa-instagram"></i></a>
-        </li>
-      </ul>
-    </div>
-    </div>
-  </footer>
-  <script>
-    $(function() {
-      var orig, sib;
-      var runs = 0;
-      var charSet = 'abcdefghijklmnopqrstuvwxyz1234567890+>?-$@%&*';
-      $('.trade').hover(function() {
-        var curr = $(this);
-
-        orig = $(this).text();
-        sib = setInterval(function() {
-          distortText(curr);
-        }, 50);
-      }, function() {
-        clearInterval(sib);
-        $(this).text(orig);
-      });
-
-      function distortText(i) {
-        if (runs >= 2) {
-          runs = 0;
-          i.text(orig);
-          return;
-        }
-        var chars = i.text().split('');
-        var rand = Math.floor(Math.random() * (chars.length));
-        var randRep = Math.floor(Math.random() * (charSet.length));
-        if (chars[rand] != charSet[randRep] && chars[rand] != ' ') {
-          chars[rand] = charSet[randRep];
-        } else {
-          distortText(i);
-        }
-        i.text(chars.join(''));
-        runs += 1;
-      }
-    });
-  </script>
-
-
-
-
-
-
-
-
-
-
-  </script>
-
-
-
-
-
-
-
-
-
-
-</body>
+      <script>
+         jQuery(document).ready(function() {
+           var cookie = false;
+           var cookieContent = $('.cookie-disclaimer');
+         
+           checkCookie();
+         
+           var controllaCookie = sessionStorage.getItem('cookie');
+           if (controllaCookie == 'true') {
+             cookieContent.hide();
+           }
+         
+           function setCookie(cname, cvalue, exdays) {
+             var d = new Date();
+             var expires = "expires=" + d.toGMTString();
+             document.cookie = cname + "=" + cvalue + "; " + expires;
+         
+           }
+         
+           function getCookie(cname) {
+             var name = cname + "=";
+             var ca = document.cookie.split(';');
+             for (var i = 0; i < ca.length; i++) {
+               var c = ca[i].trim();
+               if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+             }
+         
+             return "";
+           }
+         
+           function checkCookie() {
+             var user = getCookie("username");
+             if (user !== "") {
+               cookie = true;
+             } else {
+         
+               if (user !== "" && user !== null) {
+                 setCookie("cvalue", "cvalue", 365);
+               }
+             }
+           }
+         
+           function deleteCookie() {
+         
+             setCookie('cname', '', -1);
+           }
+         
+           $('.accept-cookie').click(function() {
+             setCookie("cname", "cvalue", 365);
+             cookieContent.hide();
+             sessionStorage.setItem('controllaCookie', true);
+         
+           });
+           //delete cookie on click
+         
+           $('.decline-cookie').click(function() {
+             deleteCookie();
+             document.getElementById('deleting').innerHTML = "deleting cookies..."
+             sessionStorage.setItem('controllaCookie', false);
+             document.getElementById('scompare').style.display = 'none'
+             setTimeout(
+               function()
+         
+               {
+         
+                 document.getElementById('deleting').innerHTML = "cookies deleted"
+               }, 3000);
+             setTimeout(
+               function() {
+                 cookieContent.hide();
+               }, 4000);
+           });
+         
+         });
+      </script>
+      <!-- fine cookie -->
+      <div class="menudesktop">
+         <div class="wrapper" id="top">
+            <div class="fixed-wrapper">
+               <div class="fixed_menu">
+                  <!-- Menù desktop orizzontale -->
+                  <div>
+                     <a href="index.html"><img src="images2/logo.png" class="logo"></a>
+                  </div>
+                  <ul>
+                     <li><a href="comingsoon.html">ABOUT</a></li>
+                     <li><a href="coronavirus/index.html">COVID-19</a></li>
+                     <li><a href="tradingdeath.html">TRADING DEATH</a></li>
+                     <li><a href="getstarted.html">GET STARTED</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="menumobile">
+         <div class="wrapper" id="top">
+            <div class="fixed-wrapper">
+               <div class="fixed_menu">
+                  <button id="burger" class="open-main-nav">
+                  <span class="burger"></span>
+                  </button>
+                  <nav class="main-nav" id="main-nav">
+                     <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="getstarted.html">GET STARTED</a></li>
+                        <li><a href="tradingdeath.html">TRADING DEATH</a></li>
+                        <li><a href="coronavirus/index.html">COVID-19</a></li>
+                        <li><a href="comingsoon.html">ABOUT</a></li>
+                        <li>
+                           <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 30px; padding-right: 8px; display: inline">
+                           <i class="fab fa-twitter-square"></i>
+                           </a>
+                           <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 30px;display: inline">
+                           <i class="fab fa-instagram"></i>
+                           </a>
+                        </li>
+                     </ul>
+                  </nav>
+                  <div>
+                     <a href="index.html"><img src="images2/logo.png" class="logo"></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Script menu mobile -->
+      <script>
+         let burger = document.getElementById('burger'),
+           nav = document.getElementById('main-nav');
+         burger.addEventListener('click', function(e) {
+           this.classList.toggle('is-open');
+           nav.classList.toggle('is-open');
+         });
+         
+         let clickEvent = new Event('click');
+      </script>
+      <!-- Contenuto pagina -->
+      <div class="hero-text">
+         <div class="getstarted_mobile">trading death</div>
+         <nav class="freccia">
+            <section id="scrolldown" class="demo">
+               <a href="#test"><span></span></a>
+            </section>
+         </nav>
+      </div>
+      <div class="getstartedDesktop">
+         <div class="getstarted_desktop">trading death</div>
+         <nav class="fixedmenu">
+            <ul id="sidebar" style="margin-top:10vh;">
+               <li><a href="#section1">01</a></li>
+               <li><a href="#section2">02</a></li>
+               <li><a href="#section3">03</a></li>
+               <li><a href="#section4">04</a></li>
+            </ul>
+         </nav>
+         <section id="section1" class="content-section">
+            <div class="teaser">what is</div>
+            <p class="teas">
+               <b>
+               Micromort is a new and innovative currency, whose value is based on human deaths depending
+               on the country in which they take place.</b>
+               <br><br>
+               Today the value of death is perceived differently depending on the place where it occurs and
+               Micromort aims to exploit this factor to make money on the dead thus defining an economic
+               value of death for each nation
+            </p>
+            <img style="margin-top:8%; " src="images2/moneta.jpg" width="100%" />
+         </section>
+         <section id="section2" class="content-section">
+            <div style="margin-top: 30%" class="teaser2">how it works</div>
+            <p class="teas">For this currency has been created Hades 2.0, a special algorithm, which combines the GDP per capita of each country,
+               the number of deaths in relation to the total population of that country.
+               What is this simple rule?
+            </p>
+            <div style="display: inline">
+               <img src="images2/grafico2.png" class="grafico">
+               <h3 class="g1">The more <br> the deaths, the lower the price.</h3>
+            </div>
+         </section>
+         <section id="section3" class="content-section" style="height: 100%;">
+            <div class="teaser3">why is born</div>
+            <p class="teas">Micromort aims to make us reflect on the reality in which we live:
+               it is not true that death is the same for everyone. Inevitably it has a social value.
+               And that value, unfortunately, is linked to the place the nation to which it belongs occupies in the world.<br><br>
+               Do you live in the West? You're lucky, your death will be worth a few tens of euros. <br>Do you live in Lesotho?
+               Well, you can hope that the value will rise to one euro one day. <br>Yet, regardless of one's origins, a human life is still a
+               life. And a death is the end of that life. Why then do we place a different value on it? And what is this value? <br><br>
+               <b>Find out at the Lost Graduation Show during Supersalone. We are waiting for you!</b>
+            </p>
+            <img style="margin-top:5%; " src="images2/Micromort.jpg" width="100%" />
+            <img style="margin-top:7%; " src="images2/1.jpg" width="100%" />
+         </section>
+         <section id="section4" class="content-section" style="height: 100vh;">
+            <div class="teaser3">in the future</div>
+            <p class="teas">Micromort was born in January 2020, just before a worldwide pandemic began. <br>
+               Although it is already a year and a half old, it is still relevant and always thought-provoking.
+               The Covid-19 pandemic was so interesting that it was analysed, both on this website and in the installation
+               <i>The Stock Exchange Experience</i>. <br><br>Even now, in 2021, as the pandemic continues and keeps killing,
+               there is another major global and humanitarian crisis: the Afghan one. Here too, Micromort aims
+               to provoke consciences and make viewers reflect on why the 13 dead American soldiers are more
+               important than the 170 dead Afghan civilians.
+            </p>
+            <img style="margin-top:5%; " src="images2/mappa.jpg" width="100%" />
+            <img style="margin-top:5%; " src="images2/kit.gif" alt="this slowpoke moves" width="100%" />
+         </section>
+      </div>
+      </div>
+      <div class="footer_desktop" style="max-width: 100%">
+         <table style="border: none">
+            <hr style="border: none">
+            <td class="foot" style="width: 35vw;">
+               <h2 style="border-bottom:1px solid #f03068; font-size: 20px; text-align:left;">About</h2>
+               <p style="font-family: 'Px Grotesk Light'; line-height:20px">Micromort is a speculative design innovation on the financial market.
+                  Micromort is not like any other currency or cryptocurrency: it is deeply different as it responds to different rules.
+                  Micromort is a death-based currency. 
+               </p>
+            </td>
+            <td class="foot" style="width: 12vw; padding-left: 100px;">
+               <ul>
+                  <h2 style="border-bottom:1px solid #f03068; margin-top: 20px; font-size: 20px; text-align:left;">Menu</h2>
+                  <li><a href="index.html">homepage</a></li>
+                  <li><a href="getstarted.html">get started</a></li>
+                  <li><a href="tradingdeath.html">trading death</a></li>
+                  <li><a href="comingsoon.html">covid-19</a></li>
+                  <li><a href="getstarted.html">about</a></li>
+               </ul>
+            </td>
+            <td class="foot" style="width: 20vw; padding-left: 100px;">
+               <h2 style="border-bottom:1px solid #f03068; margin-top: 31px; width: 110%; margin-top: 20px; font-size: 20px; text-align:left; ">Stay in touch</h2>
+               <p style="font-family: 'Px Grotesk Light'"><a class="mail" href="mailto:info@micromort.org">info@micromort.org</a></p>
+               <ul style="text-align:left">
+                  <li style="text-align:left">
+                     <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 25px;display: inline"><i class="fab fa-twitter-square"></i></a>
+                     <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 25px; padding-left: 10px; display: inline"><i class="fab fa-instagram"></i></a>
+                  </li>
+               </ul>
+            </td>
+            </hr>
+         </table>
+      </div>
+      <div class="getstartedMobile">
+         <div class="intestazione" id="test">01 what is</div>
+         <p class="teas"><b>Micromort is a new and innovative currency, whose value
+            is based on human deaths depending on the country in which they take place.</b><br><br>
+            Today the value of death is perceived differently depending on the place where it occurs and
+            Micromort aims to exploit this factor to make money on the dead thus defining an economic value of death for each nation
+         </p>
+         <img style="margin-top:15%; width: 160%; margin-left:-12%" src="images2/moneta.jpg" />
+         <div class="intestazione" style="margin-top: 65%;">02 how it works</div>
+         <p class="teas">For this currency has been created <i>Hades</i> 2.0, a special algorithm, which combines the GDP per capita of each country,
+            the number of deaths in relation to the total population of that country.
+            What is this simple rule?
+         </p>
+         <div style="display: inline; ">
+            <img style="width: 143%; margin-left:-3%" src="images2/grafico2.png" class="grafico">
+            <h3 class="g1" style="margin-left: -22%"><sup>*</sup>The more the deaths, the lower the price.</h3>
+         </div>
+         <div class="intestazione" style="margin-top: 65%;">03 why is born</div>
+         <p class="teas">Micromort aims to make us reflect on the reality in which we live:
+            it is not true that death is the same for everyone. Inevitably it has a social value.
+            And that value, unfortunately, is linked to the place the nation to which it belongs occupies in the world.<br><br>
+            Do you live in the West? You're lucky, your death will be worth a few tens of euros. <br>Do you live in Lesotho?
+            Well, you can hope that the value will rise to one euro one day. <br>Yet, regardless of one's origins, a human life is still a
+            life. And a death is the end of that life. Why then do we place a different value on it? And what is this value? <br><br>
+            <b>Find out at the Lost Graduation Show during Supersalone. We are waiting for you!</b>
+         </p>
+         <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/micromort2.jpg" />
+         <img style="margin-top:15%; width: 160%; margin-left:-12%" src="images2/1.jpg" />
+         <div class="intestazione" style="margin-top: 65%;">04 in the future</div>
+         <p class="teas">Micromort was born in January 2020, just before a worldwide pandemic began. <br>
+            Although it is already a year and a half old, it is still relevant and always thought-provoking.
+            The Covid-19 pandemic was so interesting that it was analysed, both on this website and in the installation
+            <i>The Stock Exchange Experience</i>. <br><br>Even now, in 2021, as the pandemic continues and keeps killing,
+            there is another major global and humanitarian crisis: the Afghan one. Here too, Micromort aims
+            to provoke consciences and make viewers reflect on why the 13 dead American soldiers are more
+            important than the 170 dead Afghan civilians.
+         </p>
+         <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/mappa.jpg" width="100%" />
+         <img style="margin-top:27%; width: 160%; margin-left:-12%" src="images2/kit.gif" alt="this slowpoke moves" width="100%" />
+         <!-- <script>
+            $.fn.isInViewport = function () {
+            let elementTop = $(this).offset().top;
+            let elementBottom = elementTop + $(this).outerHeight();
+            
+            let viewportTop = $(window).scrollTop();
+            let viewportBottom = viewportTop + $(window).height();
+            
+            return elementBottom > viewportTop && elementTop < viewportBottom;
+            };
+            
+            $(window).scroll(function () {
+            if ($('#section2').isInViewport()) {
+              $('#section2').fadeIn();
+            } else {
+              $('#section2').fadeOut();
+            }
+            });
+            </script> -->
+      </div>
+      <footer class="footer_mobile">
+         <div style="width: 100%; height: 10px;"></div>
+         <div class="left">
+            <h2 style="border-bottom:1px solid #f03068;">About</h2>
+            <p style="font-family: 'Px Grotesk Light'">
+               Micromort is an innovation on the financial market.
+               Micromort is not like any other currency or cryptocurrency: it is deeply different as it responds to different rules.
+               Micromort is a death-based currency.
+            </p>
+            <h2 style="border-bottom:1px solid #f03068; margin-top: 31px;">Menu</h2>
+            <li><a href="getstarted.html">homepage</a></li>
+            <li><a href="getstarted.html">get started</a></li>
+            <li><a href="comingsoon.html">trading death</a></li>
+            <li><a href="comingsoon.html">covid-19</a></li>
+            <li><a href="getstarted.html">about</a></li>
+            <h2 style="border-bottom:1px solid #f03068; margin-top: 31px;">Stay in touch</h2>
+            <p style="font-family: 'Px Grotesk Light'; padding-left: 0px;"><a class="mail" href="mailto:info@micromort.org">info@micromort.org</a></p>
+            <ul style="margin-bottom:15%;">
+               <li>
+                  <a href="https://twitter.com/micromort_org" target="_blank" style="font-size: 25px; padding-right: 2px; display: inline"><i class="fab fa-twitter-square"></i></a>
+                  <a href="https://www.instagram.com/micromort_org/" target="_blank" style="font-size: 25px; display: inline"><i class="fab fa-instagram"></i></a>
+               </li>
+            </ul>
+         </div>
+         </div>
+      </footer>
+      <script>
+         $(function() {
+           var orig, sib;
+           var runs = 0;
+           var charSet = 'abcdefghijklmnopqrstuvwxyz1234567890+>?-$@%&*';
+           $('.trade').hover(function() {
+             var curr = $(this);
+         
+             orig = $(this).text();
+             sib = setInterval(function() {
+               distortText(curr);
+             }, 50);
+           }, function() {
+             clearInterval(sib);
+             $(this).text(orig);
+           });
+         
+           function distortText(i) {
+             if (runs >= 2) {
+               runs = 0;
+               i.text(orig);
+               return;
+             }
+             var chars = i.text().split('');
+             var rand = Math.floor(Math.random() * (chars.length));
+             var randRep = Math.floor(Math.random() * (charSet.length));
+             if (chars[rand] != charSet[randRep] && chars[rand] != ' ') {
+               chars[rand] = charSet[randRep];
+             } else {
+               distortText(i);
+             }
+             i.text(chars.join(''));
+             runs += 1;
+           }
+         });
+      </script>
+      </script>
+   </body>
